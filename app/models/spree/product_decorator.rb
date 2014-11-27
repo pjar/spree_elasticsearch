@@ -108,7 +108,7 @@ module Spree
 
         # facets
         facets = {
-          price: { statistical: { field: "price" } },
+          price: { terms: { field: "price" } },
           properties: { terms: { field: "properties", order: "count", size: 1000000 } },
           taxon_ids: { terms: { field: "taxon_ids", size: 1000000 } }
         }
