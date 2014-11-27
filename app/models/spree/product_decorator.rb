@@ -6,11 +6,10 @@ module Spree
     document_type 'spree_product'
 
     mapping do
-      indexes :name, type: 'multi_field' do
-        indexes :name, type: 'string', analyzer: 'snowball', boost: 100
+      indexes :name, type: 'string', analyzer: 'polish', boost: 100 do
         indexes :untouched, type: 'string', include_in_all: false, index: 'not_analyzed'
       end
-      indexes :description, analyzer: 'snowball'
+      indexes :description, analyzer: 'polish'
       indexes :available_on, type: 'date', format: 'dateOptionalTime', include_in_all: false
       indexes :price, type: 'double'
       indexes :sku, type: 'string', index: 'not_analyzed'
