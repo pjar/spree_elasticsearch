@@ -6,9 +6,7 @@ module Spree
     document_type 'spree_product'
 
     mapping do
-      indexes :name, type: 'string', analyzer: 'polish', boost: 100 do
-        indexes :untouched, type: 'string', include_in_all: false, index: 'not_analyzed'
-      end
+      indexes :name, type: 'string', analyzer: 'polish', boost: 100
       indexes :description, analyzer: 'polish'
       indexes :available_on, type: 'date', format: 'dateOptionalTime', include_in_all: false
       indexes :price, type: 'double'
@@ -95,17 +93,17 @@ module Spree
 
         sorting = case @sorting
         when "name_asc"
-          [ {"name.untouched" => { order: "asc" }}, {"price" => { order: "asc" }}, "_score" ]
+          [ {"name" => { order: "asc" }}, {"price" => { order: "asc" }}, "_score" ]
         when "name_desc"
-          [ {"name.untouched" => { order: "desc" }}, {"price" => { order: "asc" }}, "_score" ]
+          [ {"name" => { order: "desc" }}, {"price" => { order: "asc" }}, "_score" ]
         when "price_asc"
-          [ {"price" => { order: "asc" }}, {"name.untouched" => { order: "asc" }}, "_score" ]
+          [ {"price" => { order: "asc" }}, {"name" => { order: "asc" }}, "_score" ]
         when "price_desc"
-          [ {"price" => { order: "desc" }}, {"name.untouched" => { order: "asc" }}, "_score" ]
+          [ {"price" => { order: "desc" }}, {"name" => { order: "asc" }}, "_score" ]
         when "score"
-          [ "_score", {"name.untouched" => { order: "asc" }}, {"price" => { order: "asc" }} ]
+          [ "_score", {"name" => { order: "asc" }}, {"price" => { order: "asc" }} ]
         else
-          [ {"name.untouched" => { order: "asc" }}, {"price" => { order: "asc" }}, "_score" ]
+          [ {"name" => { order: "asc" }}, {"price" => { order: "asc" }}, "_score" ]
         end
 
         # facets
